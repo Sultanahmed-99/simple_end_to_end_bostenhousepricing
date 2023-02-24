@@ -15,7 +15,7 @@ scaler = pickle.load(open('/Users/sly/Desktop/Boston Housing Price/simple_end_to
 @app.route('/')
 # open home html 
 def home():
-    return render_template('home.html.html')
+    return render_template('home.html')
 
 # create predict api
 @app.route('/predict.api' , methods = ['POST'])
@@ -36,7 +36,7 @@ def predict():
     final_inputs = scaler.transform(np.array(data).reshape(1,-1))
     print(final_inputs)
     output = reg_model.predict(final_inputs)
-    return render_template('home.html.html' , prediction_text = 'The House price prediction is {}'.format(output[0]))
+    return render_template('home.html' , prediction_text = 'The House price prediction is {}'.format(output[0]))
 
 if __name__ == '__main__':
     app.run(debug=True)
