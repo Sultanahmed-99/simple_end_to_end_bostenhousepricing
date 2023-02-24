@@ -22,11 +22,9 @@ def home():
 
 def predict_api():
     data = request.json['data']
-    print(data)
     print(np.array(list(data.values())).reshape(1,-1))
     new_data = scaler.transform(np.array(list(data.values())).reshape(1,-1))
     output = reg_model.predict(new_data)
-    print(output[0])
     return jsonify(output[0])
 
 
@@ -34,7 +32,6 @@ def predict_api():
 def predict():
     data = [float(x) for x in request.form.values()]
     final_inputs = scaler.transform(np.array(data).reshape(1,-1))
-    print(final_inputs)
     output = reg_model.predict(final_inputs)
     return render_template('home.html' , prediction_text = 'The House price prediction is {}'.format(output[0]))
 
